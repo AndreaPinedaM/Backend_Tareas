@@ -3,6 +3,12 @@ const express = require('express')
 /* A package that allows to color the console.log() messages. */
 const colors = require('colors')
 
+/* middleware that allows cross-origin resource sharing. 
+It enables a web application running at one origin (domain) to access
+resources from a server at a different origin. This is useful when building APIs that will be
+accessed by clients from different domains. */
+const cors = require('cors')
+
 /* Loading the environment variables from the .env file. */
 const dotenv = require('dotenv').config()
 const {errorHandler} = require('./middleware/errorMiddleware')
@@ -17,6 +23,7 @@ const port = process.env.PORT || 5000
 connectDB()
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded( {extended: false} ))
 
